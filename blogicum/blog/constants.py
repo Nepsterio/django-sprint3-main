@@ -1,0 +1,1 @@
+POSTS_MAX = 5
