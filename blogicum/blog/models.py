@@ -47,7 +47,7 @@ class Category(models.Model):
     title = models.CharField(max_length=256, blank=False,
                              verbose_name='Заголовок')
     description = models.TextField(blank=False, verbose_name='Описание')
-    slug = models.SlugField(unique=True, 
+    slug = models.SlugField(unique=True,
                             verbose_name='Идентификатор',
                             help_text='Идентификатор страницы для URL; '
                             'разрешены символы латиницы, цифры, дефис и '
@@ -56,7 +56,7 @@ class Category(models.Model):
                                        verbose_name='Опубликовано',
                                        help_text='Снимите галочку, чтобы '
                                        'скрыть публикацию.')
-    created_at = models.DateTimeField(auto_now_add=True, 
+    created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name='Добавлено')
 
     class Meta:
@@ -68,14 +68,14 @@ class Category(models.Model):
 
 
 class Location(models.Model):
-    name = models.CharField(max_length=256, blank=False, 
+    name = models.CharField(max_length=256, blank=False,
                             verbose_name='Название места')
     is_published = models.BooleanField(default=True,
                                        blank=False,
                                        verbose_name='Опубликовано',
                                        help_text='Снимите галочку, чтобы '
                                        'скрыть публикацию.')
-    created_at = models.DateTimeField(auto_now_add=True, 
+    created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name='Добавлено')
 
     class Meta:
