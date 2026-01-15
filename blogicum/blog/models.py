@@ -28,11 +28,9 @@ class Post(CommonInfo):
         verbose_name='Заголовок'
     )
     text = models.TextField(
-        blank=False,
         verbose_name='Текст'
     )
     pub_date = models.DateTimeField(
-        blank=False,
         verbose_name='Дата и время публикации',
         help_text=(
             'Если установить дату и время в будущем — можно делать отложенные '
@@ -55,6 +53,7 @@ class Post(CommonInfo):
         'Category',
         on_delete=models.SET_NULL,
         null=True,
+        related_name='posts',
         verbose_name='Категория'
     )
 
