@@ -1,6 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from .constants import MAX_TEXT
+
+
+User = get_user_model()
+
 
 class CommonInfo(models.Model):
     is_published = models.BooleanField(
@@ -15,9 +20,6 @@ class CommonInfo(models.Model):
 
     class Meta:
         abstract = True
-
-
-User = get_user_model()
 
 
 class Post(CommonInfo):
@@ -41,11 +43,11 @@ class Post(CommonInfo):
         'Location', on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        related_name='posts',
         verbose_name='Местоположение'
     )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE,
-        blank=False,
         related_name='posts',
         verbose_name='Автор публикации'
     )
@@ -53,26 +55,23 @@ class Post(CommonInfo):
         'Category',
         on_delete=models.SET_NULL,
         null=True,
-        blank=False,
         verbose_name='Категория'
     )
-
-    def __str__(self):
-        return self.title[:30]
 
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
 
+    def __str__(self):
+        return self.title[MAX_TEXT]
+
 
 class Category(CommonInfo):
     title = models.CharField(
         max_length=256,
-        blank=False,
         verbose_name='Заголовок'
     )
     description = models.TextField(
-        blank=False,
         verbose_name='Описание'
     )
     slug = models.SlugField(
@@ -89,13 +88,12 @@ class Category(CommonInfo):
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.title[:30]
+        return self.title[MAX_TEXT]
 
 
 class Location(CommonInfo):
     name = models.CharField(
         max_length=256,
-        blank=False,
         verbose_name='Название места'
     )
 
@@ -104,4 +102,4 @@ class Location(CommonInfo):
         verbose_name_plural = 'Местоположения'
 
     def __str__(self):
-        return self.name[:30]
+        return self.name[MAX_TEXT]

@@ -1,1 +1,2 @@
 POSTS_MAX = 5
+MAX_TEXT = 30
